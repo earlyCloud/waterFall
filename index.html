@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+    <title>瀑布流相册</title>
+	<meta charset="utf-8" />
+	<script src="./js/waterfall.js"></script>
+<style>
+*{
+    margin: 0;
+	padding: 0;
+}
+#larBox{
+    width: 100%;
+	position: relative;
+	text-align: center;
+    background: black;
+	display: none;	
+}
+#main{   
+   margin: 0 auto;
+   position: relative;
+}
+.box{
+   padding: 4px 3px;
+   border: 1px solid #ccc;
+   box-shadow: 0 0 15px #ccc;
+   float: left;
+}
+.box img{
+   width: 270px;
+   height: auto;
+}
+.box img:hover{
+   cursor: pointer; 
+   box-shadow:  0 0 15px blue;
+}
+
+.slideIn{
+   -webkit-animation-name: slideIn;
+   animation-name: slideIn;
+   -webkit-animation-duration: .5s;
+   animation-duration: .5s;
+}
+@keyframes slideIn{
+   from{
+      -webkit-transform: translateY(-20px);
+      transform: translateY(-20px);
+	  opacity: 0;
+	  -webkit-animation-timing-function: ease-out;
+	  animation-timing-function: ease-out;
+   }to{
+      -webkit-transform: none;
+	  transform: none;
+      opacity: 1;
+   }
+}
+
+
+</style>
+</head>
+<body>
+    <div id="larBox">
+	    <img />
+	</div>
+
+    <div id="main">
+	    <div class="box">
+		    <img src="./images/1.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/2.jpg" />
+		</div>	
+	    <div class="box">
+		    <img src="./images/3.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/4.jpg" />
+		</div>	
+	    <div class="box">
+		    <img src="./images/5.jpg" />
+		</div>	
+	    <div class="box">
+		    <img src="./images/6.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/7.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/8.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/9.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/10.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/11.jpg" />
+		</div>		
+	    <div class="box">
+		    <img src="./images/12.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/13.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/14.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/15.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/16.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/17.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/18.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/19.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/20.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/21.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/22.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/23.jpg" />
+		</div>
+		<div class="box">
+		    <img src="./images/24.jpg" />
+		</div>
+
+	</div>
+
+
+
+
+</body>
+</html>
