@@ -108,7 +108,7 @@ function loadImg(){
 	   box.className = 'box';
 	   oParent.appendChild(box);
 	   var img = document.createElement('img');
-	   img.src = "./images/"+(boxes.length+i)+".jpg";
+	   img.src = "./images/preImg/"+(boxes.length+i)+".jpg";
 	   box.appendChild(img);
 	}	
 }
@@ -141,7 +141,7 @@ function loadLargeImg(event){
 	 _scrollTop = getScroll('top');
 	 window.onscroll = null;
 
-	 larImg[0].src = event.target.src;
+	 larImg[0].src = event.target.src.replace("/preImg", "");
      //var reaW = larImg[0].width;     //这两句放在这里的话在IE那里会有奇葩的表现。。。不知道为什么
 	 //var reaH = larImg[0].height;		//ie和其它主流浏览器对于img的宽高问题有出入
 	 var winW = document.body.clientWidth || document.documentElement.clientWidth;
