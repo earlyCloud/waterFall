@@ -7,14 +7,15 @@ var _scrollTop;
      var larBox = document.getElementById('larBox'); 
      main.addEventListener('click',loadLargeImg,false);
 	 larBox.addEventListener('click',function(){
-		  main.style.display = 'block';
-          window.onscroll = scroll;
-		  document.documentElement.scrollTop = _scrollTop;
-		  document.body.scrollTop = _scrollTop;
-	      larBox.style.display = 'none';
-	      //重置大图src
-	      var larImg = larBox.getElementsByTagName('img')[0];
-	      larImg.src = "";
+	 	main.style.display = 'block';
+	 	window.onscroll = scroll;
+	 	document.documentElement.scrollTop = _scrollTop;
+	 	document.body.scrollTop = _scrollTop;
+		//重置大图src
+		var larImg = larBox.getElementsByTagName('img')[0];
+		larImg.src = "";
+		larBox.style.display = 'none';
+
 	 },false);   
 }();
 
