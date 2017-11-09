@@ -1,5 +1,5 @@
 var _scrollTop;
-window.onload = function(){
++function(){
      waterfall('main','box');
 	 window.onscroll = scroll;
 	 
@@ -12,8 +12,11 @@ window.onload = function(){
 		  document.documentElement.scrollTop = _scrollTop;
 		  document.body.scrollTop = _scrollTop;
 	      larBox.style.display = 'none';
+	      //重置大图src
+	      var larImg = larBox.getElementsByTagName('img')[0];
+	      larImg.src = "";
 	 },false);   
-}
+}();
 
 
 
