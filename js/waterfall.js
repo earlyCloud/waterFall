@@ -1,35 +1,33 @@
-var _scrollTop;
 +function(){
-     waterfall('main','box');
-	 window.onscroll = scroll;
-	 
-	 var main = document.getElementById('main');
-     var larBox = document.getElementById('larBox'); 
-     main.addEventListener('click',loadLargeImg,false);
-	 larBox.addEventListener('click',function(){
-	 	main.style.display = 'block';
-	 	window.onscroll = scroll;
-	 	document.documentElement.scrollTop = _scrollTop;
-	 	document.body.scrollTop = _scrollTop;
+	var _scrollTop;
+
+	window.onscroll = deleyedScroll;
+	window.onload = init; 
+	var main = document.getElementById('main'),
+       larBox = document.getElementById('larBox'); 
+   main.addEventListener('click',loadLargeImg,false);
+   larBox.addEventListener('click',function(){
+    	main.style.display = 'block';
+    	window.onscroll = deleyedScroll;
+    	document.documentElement.scrollTop = _scrollTop;
+    	document.body.scrollTop = _scrollTop;
 		//重置大图src
 		var larImg = larBox.getElementsByTagName('img')[0];
 		larImg.src = "";
 		larBox.style.display = 'none';
 
 	 },false);   
-}();
+ 
 
-
-
-
-
-
-
+/****************************************************/	
+function init(){
+	waterfall('main','box');
+}  
 function waterfall(parent,box){
 	//将main下的所有class为box的元素取出来
-     var oParent = document.getElementById(parent);
+     var oParent = typeof parent == 'string' ? document.getElementById(parent) : parent;
 	 var boxes = getByClass(oParent,box);   //存放所有的box的数组
-	 //计算整个页面显示的页数
+	 //计算整个页面显示的列数
 	 var boxW = boxes[0].offsetWidth;  //content+padding+border
 	 var cols = Math.floor(document.documentElement.clientWidth/boxW);
      //为了居中和在浏览器视口改变时保持列数一定，需要main具有宽度且宽度不变
@@ -63,17 +61,9 @@ function getByClass(parent,claName){
 
 //添加class
 function addClass(ele,className){
-     if(ele.className){
-		 var claArr = ele.className.split(' ');
-		 for(var i in claArr){   //如果元素中原来有这个class，那么就没必要再添加
-			 if (claArr[i]==className){
-				 return;
-			 }
-		 }	 
-	     ele.className += (' '+className);
-	 }else{
-	     ele.className = className;
-	 }
+	if(!ele.className || ele.className.indexOf(className) == -1) 
+		ele.className += (' ' + className);
+	return; 
 }
 
 //获取数组中最小值
@@ -83,6 +73,26 @@ function getMinHIndex(arr,val){
 		   return i;
 		}
 	}
+}
+/*模拟extend
+*这里只拓展外部对象
+*/
+function extend(){
+	//拓展对象从第二个参数算起
+	var i = 1,
+	    len = arguments.length,
+	    //第一个参数为待拓展对象
+	    target = arguments[0],
+	    j;         //拓展对象中属性名;
+	//遍历拓展对象
+	for(; i<len; i++){
+		//遍历拓展对象中属性
+		for(j in arguments[i]){
+			target[j] = arguments[i][j];
+		}
+	}
+	return target;
+
 }
 
 //检测是否具备加载数据块的条件
@@ -94,12 +104,47 @@ function checkScrollSlide(){
 	var winHeight = document.body.clientHeight || document.documentElement.clientHeight;
 	return (lastBoxH<scrollTop+winHeight)?true:false;
 }
+//节流器
+function throttle(){
+	//获取第一个参数
+	var isClear = arguments[0], fn;
+	//如果第一个参数是boolean类型那么第一个参数表示是否清除计时器
+	if(typeof isClear == "boolean"){
+		//第二个参数则为函数
+		fn = arguments[1];
+		//函数的计时器句柄存在，则清除该计时器
+		fn._throttleID && clearTimeout(fn._throttleID);
+	}else{
+		//第一个参数为函数
+		fn = isClear;
+		//第二个参数(对象)为函数执行时的参数
+		var param = arguments[1];
+
+		//默认参数配置
+		var p = extend({
+			context: null,   //执行函数执行时候的作用域
+			args: [],        //执行函数执行时候的参数
+			time: 100        //执行函数延迟执行的时间(毫秒)
+		}, param);
+		//清除执行函数的计时器句柄
+		arguments.callee(true, fn);
+		//为函数绑定计时器句柄，延迟执行函数
+		fn._throttleID = setTimeout(function(){
+			//执行函数
+			fn.apply(p.context, p.args)
+		}, p.time);
+	}
+}
+
 //滚动事件触发时调用函数
 function scroll(){
     if(checkScrollSlide()){
 	     loadImg();
 		 waterfall('main','box');
     }
+}
+function deleyedScroll(){
+	throttle(scroll);
 }
 
 //当滚动条到达页面底部时动态加载图片
@@ -177,3 +222,11 @@ function loadLargeImg(event){
 	 }
 	 addClass(larImg[0],'slideIn');
 }   
+}();
+
+
+
+
+
+
+
