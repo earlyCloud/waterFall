@@ -231,8 +231,9 @@ function loadLargeImg(event){
 	 		larImg[0].style.marginTop = (winH-reaH)/2 + 'px';
 	 	}
 	 	larImg[0].onload = null;
+	 	addClass(larImg[0],'slideIn');
 	 }
-	 addClass(larImg[0],'slideIn');
+	 
 }   
 }();
 
