@@ -205,16 +205,13 @@ function loadLargeImg(event){
 	 larImg[0].style.height = 'auto';
 	 larImg[0].style.marginTop = 0+'px';
 
-	 var reaW = larImg[0].width;    //所以放在这里(设定了style.width后面)
-	 var reaH = larImg[0].height;   //chrome浏览器图片没有加载完成的时候，图片的宽高是0（广告，火狐里面图片没有加载完成也是可以获取宽高的）
+	 //var reaW = larImg[0].width;    //所以放在这里(设定了style.width后面)
+	 //var reaH = larImg[0].height;   //chrome浏览器图片没有加载完成的时候，图片的宽高是0（广告，火狐里面图片没有加载完成也是可以获取宽高的）
 
-	 if(!reaW){
-	 	larImg[0].addEventListener("load", loacateImg);
-	 }else{
-	 	loacateImg();
-	 }
-	
-	 function loacateImg(){
+	 larImg[0].addEventListener("load", _loacateImg);
+	 function _loacateImg(){
+	 	var reaW = larImg[0].width;
+	 	var reaH = larImg[0].height;
 	 	if(reaW/reaH < 1.2){    //竖图
 	 		larImg[0].style.height = winH+'px';	
 	 	}else if(reaW>winW){   //宽度大于屏幕宽度的横图
