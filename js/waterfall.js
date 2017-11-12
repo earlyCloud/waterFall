@@ -204,11 +204,18 @@ function loadLargeImg(event){
 	 larImg[0].style.width = 'auto';
 	 larImg[0].style.height = 'auto';
 	 larImg[0].style.marginTop = 0+'px';
+	 //清除load事件句柄
+	 larImg[0].onload = _loacateImg;
 
 	 //var reaW = larImg[0].width;    //所以放在这里(设定了style.width后面)
 	 //var reaH = larImg[0].height;   //chrome浏览器图片没有加载完成的时候，图片的宽高是0（广告，火狐里面图片没有加载完成也是可以获取宽高的）
-
-	 larImg[0].addEventListener("load", _loacateImg);
+	 /*
+	 *处理方法
+	 *	1.提前缓存图片；
+	 * 2.给img设置onload事件；
+	 * 3.在服务器端存储图片大小、宽高等信息，然后在客户端提前获取
+	 */
+	 //larImg[0].addEventListener("load", _loacateImg);
 	 function _loacateImg(){
 	 	var reaW = larImg[0].width;
 	 	var reaH = larImg[0].height;
@@ -223,7 +230,7 @@ function loadLargeImg(event){
 	 	}else{     //宽度小于屏幕宽度，高度小于屏幕高度的横图
 	 		larImg[0].style.marginTop = (winH-reaH)/2 + 'px';
 	 	}
-	 	larImg[0].removeEventListener("load", _loacateImg);
+	 	larImg[0].onload = null;
 	 }
 	 addClass(larImg[0],'slideIn');
 }   
