@@ -213,7 +213,7 @@ function loadLargeImg(event){
 	 *处理方法
 	 *	1.提前缓存图片；
 	 * 2.给img设置onload事件；
-	 * 3.在服务器端存储图片大小、宽高等信息，然后在客户端提前获取
+	 * 3.在服务器端存储图片大小、宽高等信息，然后在客户端提前获取（推荐）
 	 */
 	 //larImg[0].addEventListener("load", _loacateImg);
 	 function _loacateImg(){
