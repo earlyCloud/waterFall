@@ -223,6 +223,7 @@ function loadLargeImg(event){
 	 	}else{     //宽度小于屏幕宽度，高度小于屏幕高度的横图
 	 		larImg[0].style.marginTop = (winH-reaH)/2 + 'px';
 	 	}
+	 	larImg[0].removeEventListener("load", _loacateImg);
 	 }
 	 addClass(larImg[0],'slideIn');
 }   
