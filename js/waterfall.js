@@ -206,19 +206,26 @@ function loadLargeImg(event){
 	 larImg[0].style.marginTop = 0+'px';
 
 	 var reaW = larImg[0].width;    //所以放在这里(设定了style.width后面)
-	 var reaH = larImg[0].height;   //
+	 var reaH = larImg[0].height;   //chrome浏览器图片没有加载完成的时候，图片的宽高是0（广告，火狐里面图片没有加载完成也是可以获取宽高的）
 
-	 if(reaW/reaH < 1.2){    //竖图
-	      larImg[0].style.height = winH+'px';	
-	 }else if(reaW>winW){   //宽度大于屏幕宽度的横图
-	      larImg[0].style.width = winW+"px";
-		  
-		  (winH-larImg[0].scrollHeight>0)?(larImg[0].style.marginTop = (winH-larImg[0].scrollHeight)/2 + 'px'):(setScrollTop(winH));		  
-	 }else if(reaH>winH){    //宽度小于屏幕宽度,高度大于屏幕高度的横图
-	     larBox.style.height = reaH+'px';
-		 setScrollTop(winH);
-	 }else{     //宽度小于屏幕宽度，高度小于屏幕高度的横图
-      	 larImg[0].style.marginTop = (winH-reaH)/2 + 'px';
+	 if(!reaW){
+	 	larImg[0].addEventListener("load", loacateImg);
+	 }else{
+	 	loacateImg();
+	 }
+	
+	 function loacateImg(){
+	 	if(reaW/reaH < 1.2){    //竖图
+	 		larImg[0].style.height = winH+'px';	
+	 	}else if(reaW>winW){   //宽度大于屏幕宽度的横图
+	 		larImg[0].style.width = winW+"px";
+	 		(winH-larImg[0].scrollHeight>0)?(larImg[0].style.marginTop = (winH-larImg[0].scrollHeight)/2 + 'px'):(setScrollTop(winH));		  
+	 	}else if(reaH>winH){    //宽度小于屏幕宽度,高度大于屏幕高度的横图
+	 		larBox.style.height = reaH+'px';
+	 		setScrollTop(winH);
+	 	}else{     //宽度小于屏幕宽度，高度小于屏幕高度的横图
+	 		larImg[0].style.marginTop = (winH-reaH)/2 + 'px';
+	 	}
 	 }
 	 addClass(larImg[0],'slideIn');
 }   
